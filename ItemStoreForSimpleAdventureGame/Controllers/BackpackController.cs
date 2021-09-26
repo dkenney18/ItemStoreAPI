@@ -21,7 +21,7 @@ namespace ItemStoreForSimpleAdventureGame.Controllers
         public ActionResult<List<Backpack>> Get() =>
             _backpackService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetItem")]
+        [HttpGet("{id:length(24)}", Name = "GetBackpack")]
         public ActionResult<List<Backpack>> Get(string id)
         {
             var backpack = _backpackService.Get(id);
