@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using ItemStoreForSimpleAdventureGame.Models;
 using ItemStoreForSimpleAdventureGame.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -20,17 +21,17 @@ namespace ItemStoreForSimpleAdventureGame.Controllers
         public ActionResult<List<Backpack>> Get() =>
             _backpackService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetBackpack")]
-        public ActionResult<List<Backpack>> Get(string ownerID)
+        [HttpGet("{id:length(24)}", Name = "GetItem")]
+        public ActionResult<List<Backpack>> Get(string id)
         {
-            var backpacks = _backpackService.Get(ownerID);
+            var backpack = _backpackService.Get(id);
 
-            if (backpacks == null)
+            if (backpack == null)
             {
                 return NotFound();
             }
 
-            return backpacks;
+            return backpack;
         }
 
         [HttpPost]
