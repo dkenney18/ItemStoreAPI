@@ -30,6 +30,14 @@ namespace ItemStoreForSimpleAdventureGame
 
             services.AddSingleton<ItemStoreService>();
 
+            services.Configure<BackpackDatabaseSettings>(
+        Configuration.GetSection(nameof(BackpackDatabaseSettings)));
+
+            services.AddSingleton<IBackpackDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<BackpackDatabaseSettings>>().Value);
+
+            services.AddSingleton<BackpackService>();
+
             services.AddControllers();
 
         }

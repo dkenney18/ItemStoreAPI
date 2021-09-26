@@ -20,8 +20,19 @@ namespace ItemStoreForSimpleAdventureGame.Services
         public List<Backpack> Get() =>
             _items.Find(item => true).ToList();
 
-        public Backpack Get(string id) =>
-            _items.Find<Backpack>(item => item.Id == id).FirstOrDefault();
+        public List<Backpack> Get(string playerID)
+        {
+            var items =_items.Find(item => true).ToList();
+            var backpacks = new List<Backpack>();
+            foreach (var backpack in items)
+            {
+                if (backpack.OwnerID == playerID)
+                {
+                    backpacks.Add(backpack);
+                }
+            }
+            return backpacks;
+        }
 
         public Backpack Create(Backpack backpack)
         {
@@ -29,13 +40,13 @@ namespace ItemStoreForSimpleAdventureGame.Services
             return backpack;
         }
 
-        public void Update(string id, Backpack backpackIn) =>
-            _items.ReplaceOne(backpack => backpack.Id == id, backpackIn);
+        public void Update(string playerID, Backpack backpackIn) =>
+            _items.ReplaceOne(backpack => backpack.OwnerID == playerID, backpackIn);
 
         public void Remove(Backpack backpackIn) =>
-            _items.DeleteOne(backpack => backpack.Id == backpackIn.Id);
+            _items.DeleteOne(backpack => backpack.OwnerID == backpackIn.OwnerID);
 
-        public void Remove(string id) =>
-            _items.DeleteOne(backpack => backpack.Id == id);
+        public void Remove(string playerID) =>
+            _items.DeleteOne(backpack => backpack.OwnerID == playerID);
     }
 }
