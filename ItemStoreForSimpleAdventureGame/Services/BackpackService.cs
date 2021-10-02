@@ -44,9 +44,9 @@ namespace ItemStoreForSimpleAdventureGame.Services
             _items.ReplaceOne(backpack => backpack.OwnerID == playerID, backpackIn);
 
         public void Remove(Backpack backpackIn) =>
-            _items.DeleteOne(backpack => backpack.OwnerID == backpackIn.OwnerID);
+            _items.DeleteMany(backpack => backpack.OwnerID == backpackIn.OwnerID);
 
         public void Remove(string playerID) =>
-            _items.DeleteOne(backpack => backpack.OwnerID == playerID);
+            _items.DeleteMany(backpack => backpack.OwnerID == playerID);
     }
 }
