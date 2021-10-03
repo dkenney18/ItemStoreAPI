@@ -42,7 +42,7 @@ namespace ItemStoreForSimpleAdventureGame
 
             services.AddHttpsRedirection(options =>
             {
-                options.HttpsPort = 5000;
+                options.HttpsPort = 5001;
             }); 
 
         }
