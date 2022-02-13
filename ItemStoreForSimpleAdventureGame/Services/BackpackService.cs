@@ -36,7 +36,12 @@ namespace ItemStoreForSimpleAdventureGame.Services
 
         public Backpack Create(Backpack backpack)
         {
-            backpack.Item.Id = Guid.NewGuid().ToString();
+            backpack.Item = new Item() {
+                Name = backpack.Item.Name,
+                Amount = backpack.Item.Amount,
+                Damage = backpack.Item.Damage,
+                Value = backpack.Item.Value
+            };
             _items.InsertOne(backpack);
             return backpack;
         }
