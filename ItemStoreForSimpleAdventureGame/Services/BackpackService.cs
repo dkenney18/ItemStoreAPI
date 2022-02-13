@@ -49,7 +49,7 @@ namespace ItemStoreForSimpleAdventureGame.Services
         public void RemoveItem(Backpack backpackIn) =>
             _items.DeleteOne(backpack => backpack.Item.Id == backpackIn.Item.Id);
 
-        public void Remove(string playerID) =>
-            _items.DeleteMany(backpack => backpack.OwnerID == playerID);
+        //public void Remove(string playerID) =>
+          //  _items.DeleteMany(backpack => backpack.OwnerID == playerID);
     }
 }

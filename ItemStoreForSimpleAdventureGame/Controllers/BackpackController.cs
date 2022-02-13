@@ -54,20 +54,20 @@ namespace ItemStoreForSimpleAdventureGame.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string ownerID)
-        {
-            var backpacks = _backpackService.Get(ownerID);
+        //[HttpDelete("{id:length(24)}")]
+        //public IActionResult Delete(string ownerID)
+        //{
+        //    var backpacks = _backpackService.Get(ownerID);
 
-            if (backpacks == null)
-            {
-                return NotFound();
-            }
+        //    if (backpacks == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _backpackService.Remove(ownerID);
+        //    _backpackService.Remove(ownerID);
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         [HttpDelete]
         public IActionResult DeleteItem(Backpack backpack)
