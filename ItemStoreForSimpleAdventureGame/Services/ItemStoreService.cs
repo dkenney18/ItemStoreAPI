@@ -23,6 +23,7 @@ namespace ItemStoreForSimpleAdventureGame.Services
         public Item Get(string id) =>
             _items.Find<Item>(item => item.Id == id).FirstOrDefault();
 
+
         public Item Create(Item item)
         {
             _items.InsertOne(item);
