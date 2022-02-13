@@ -38,19 +38,18 @@ namespace ItemStoreForSimpleAdventureGame.Controllers
         public ActionResult<Backpack> Create(Backpack backpack)
         {
             _backpackService.Create(backpack);
-
             return CreatedAtRoute("GetBackpack", new { id = backpack.OwnerID }, backpack);
         }
 
-        [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string ownerID, Backpack backpack)
+        [HttpPut]
+        public IActionResult Update(Backpack backpack)
         {
             if (backpack == null)
             {
                 return NotFound();
             }
 
-            _backpackService.Update(ownerID, backpack);
+            _backpackService.Update(backpack);
 
             return NoContent();
         }
@@ -66,6 +65,21 @@ namespace ItemStoreForSimpleAdventureGame.Controllers
             }
 
             _backpackService.Remove(ownerID);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteItem(Backpack backpack)
+        {
+            var backpacks = _backpackService.Get(backpack.OwnerID);
+
+            if (backpacks == null)
+            {
+                return NotFound();
+            }
+
+            _backpackService.RemoveItem(backpack);
 
             return NoContent();
         }

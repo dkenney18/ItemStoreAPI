@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ItemStoreForSimpleAdventureGame.Models;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 
@@ -37,15 +38,16 @@ namespace ItemStoreForSimpleAdventureGame.Services
 
         public Backpack Create(Backpack backpack)
         {
+            backpack.Item.Id = ObjectId.GenerateNewId().ToString();
             _items.InsertOne(backpack);
             return backpack;
         }
 
-        public void Update(string playerID, Backpack backpackIn) =>
-            _items.ReplaceOne(backpack => backpack.OwnerID == playerID, backpackIn);
+        public void Update(Backpack backpackIn) =>
+            _items.ReplaceOne(backpack => backpack.OwnerID == backpackIn.OwnerID, backpackIn);
 
-        public void Remove(Backpack backpackIn) =>
-            _items.DeleteMany(backpack => backpack.OwnerID == backpackIn.OwnerID);
+        public void RemoveItem(Backpack backpackIn) =>
+            _items.DeleteOne(backpack => backpack.Item.Id == backpackIn.Item.Id);
 
         public void Remove(string playerID) =>
             _items.DeleteMany(backpack => backpack.OwnerID.Equals(playerID));
