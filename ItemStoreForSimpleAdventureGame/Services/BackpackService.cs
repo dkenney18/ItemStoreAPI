@@ -50,6 +50,6 @@ namespace ItemStoreForSimpleAdventureGame.Services
             _items.DeleteOne(backpack => backpack.Item.Id == backpackIn.Item.Id);
 
         public void Remove(string playerID) =>
-            _items.DeleteMany(backpack => backpack.OwnerID.Equals(playerID));
+            _items.DeleteMany(backpack => backpack.OwnerID == playerID);
     }
 }
