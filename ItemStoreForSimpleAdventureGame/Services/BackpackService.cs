@@ -8,9 +8,6 @@ namespace ItemStoreForSimpleAdventureGame.Services
 {
     public class BackpackService
     {
-        [BsonId]
-        public string id { get; set; }
-
         private readonly IMongoCollection<Backpack> _items;
 
         public BackpackService(IBackpackDatabaseSettings settings)
@@ -40,7 +37,6 @@ namespace ItemStoreForSimpleAdventureGame.Services
 
         public Backpack Create(Backpack backpack)
         {
-            backpack.Item.Id = id;
             _items.InsertOne(backpack);
             return backpack;
         }
