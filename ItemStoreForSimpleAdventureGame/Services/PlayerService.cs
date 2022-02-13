@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ItemStoreForSimpleAdventureGame.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace ItemStoreForSimpleAdventureGame.Services
@@ -25,6 +26,8 @@ namespace ItemStoreForSimpleAdventureGame.Services
 
         public Player Create(Player player)
         {
+            player.LeftHand.Id = ObjectId.GenerateNewId().ToString();
+            player.RightHand.Id = ObjectId.GenerateNewId().ToString();
             _players.InsertOne(player);
             return player;
         }
